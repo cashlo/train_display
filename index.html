@@ -107,9 +107,13 @@
         /* Header Row */
         .header {
             height: 15vh; /* Fixed height for header */
-            color: #888;
+            color: #fff !important;
             border-bottom: 2px solid #555;
-            font-size: 5vh;
+            font-size: 7vh;
+        }
+
+        .header > div {
+            text-align: center !important;
         }
 
         /* Train Rows */
@@ -164,9 +168,9 @@
     <div class="timetable-section">
         <div class="row header">
             <div class="col-dir"></div>
-            <div class="col-type">種別</div>
-            <div class="col-time">時刻</div>
-            <div class="col-dest">行先</div>
+            <div class="col-type">種別 Train</div>
+            <div class="col-time">時刻 Dep. Time</div>
+            <div class="col-dest">行先 To</div>
         </div>
 
         <div id="row-d1" class="row train-row led-text">
