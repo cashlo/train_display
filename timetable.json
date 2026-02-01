@@ -1,0 +1,1726 @@
+{
+  "weekday": [
+    {
+      "hour": 5,
+      "minute": 7,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "成田空港",
+      "car": "-"
+    },
+    {
+      "hour": 5,
+      "minute": 29,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "成田空港",
+      "car": "-"
+    },
+    {
+      "hour": 5,
+      "minute": 53,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "成田空港",
+      "car": "-"
+    },
+    {
+      "hour": 6,
+      "minute": 12,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "成田空港",
+      "car": "-"
+    },
+    {
+      "hour": 6,
+      "minute": 26,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "ちはら台",
+      "car": "-"
+    },
+    {
+      "hour": 6,
+      "minute": 36,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成臼井",
+      "car": "-"
+    },
+    {
+      "hour": 6,
+      "minute": 43,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "千葉中央",
+      "car": "-"
+    },
+    {
+      "hour": 6,
+      "minute": 51,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "芝山千代田",
+      "car": "-"
+    },
+    {
+      "hour": 6,
+      "minute": 59,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成臼井",
+      "car": "-"
+    },
+    {
+      "hour": 7,
+      "minute": 10,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成臼井",
+      "car": "-"
+    },
+    {
+      "hour": 7,
+      "minute": 20,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "芝山千代田",
+      "car": "-"
+    },
+    {
+      "hour": 7,
+      "minute": 30,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "ちはら台",
+      "car": "-"
+    },
+    {
+      "hour": 7,
+      "minute": 42,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "千葉中央",
+      "car": "-"
+    },
+    {
+      "hour": 7,
+      "minute": 53,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成臼井",
+      "car": "-"
+    },
+    {
+      "hour": 8,
+      "minute": 6,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成大和田",
+      "car": "-"
+    },
+    {
+      "hour": 8,
+      "minute": 13,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "宗吾参道",
+      "car": "-"
+    },
+    {
+      "hour": 8,
+      "minute": 18,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成臼井",
+      "car": "-"
+    },
+    {
+      "hour": 8,
+      "minute": 27,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "宗吾参道",
+      "car": "-"
+    },
+    {
+      "hour": 8,
+      "minute": 37,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成臼井",
+      "car": "-"
+    },
+    {
+      "hour": 8,
+      "minute": 47,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "宗吾参道",
+      "car": "-"
+    },
+    {
+      "hour": 8,
+      "minute": 58,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成臼井",
+      "car": "-"
+    },
+    {
+      "hour": 9,
+      "minute": 9,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "ちはら台",
+      "car": "-"
+    },
+    {
+      "hour": 9,
+      "minute": 19,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成臼井",
+      "car": "-"
+    },
+    {
+      "hour": 9,
+      "minute": 27,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "ちはら台",
+      "car": "-"
+    },
+    {
+      "hour": 9,
+      "minute": 38,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成臼井",
+      "car": "-"
+    },
+    {
+      "hour": 9,
+      "minute": 47,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成津田沼",
+      "car": "-"
+    },
+    {
+      "hour": 9,
+      "minute": 57,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成臼井",
+      "car": "-"
+    },
+    {
+      "hour": 10,
+      "minute": 8,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成津田沼",
+      "car": "-"
+    },
+    {
+      "hour": 10,
+      "minute": 18,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成臼井",
+      "car": "-"
+    },
+    {
+      "hour": 10,
+      "minute": 29,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成津田沼",
+      "car": "-"
+    },
+    {
+      "hour": 10,
+      "minute": 38,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成臼井",
+      "car": "-"
+    },
+    {
+      "hour": 10,
+      "minute": 48,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成津田沼",
+      "car": "-"
+    },
+    {
+      "hour": 10,
+      "minute": 58,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成臼井",
+      "car": "-"
+    },
+    {
+      "hour": 11,
+      "minute": 7,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成津田沼",
+      "car": "-"
+    },
+    {
+      "hour": 11,
+      "minute": 18,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成津田沼",
+      "car": "-"
+    },
+    {
+      "hour": 11,
+      "minute": 28,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成佐倉",
+      "car": "-"
+    },
+    {
+      "hour": 11,
+      "minute": 40,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成津田沼",
+      "car": "-"
+    },
+    {
+      "hour": 11,
+      "minute": 50,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成津田沼",
+      "car": "-"
+    },
+    {
+      "hour": 12,
+      "minute": 0,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成津田沼",
+      "car": "-"
+    },
+    {
+      "hour": 12,
+      "minute": 10,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成佐倉",
+      "car": "-"
+    },
+    {
+      "hour": 12,
+      "minute": 20,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成津田沼",
+      "car": "-"
+    },
+    {
+      "hour": 12,
+      "minute": 30,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成津田沼",
+      "car": "-"
+    },
+    {
+      "hour": 12,
+      "minute": 40,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成津田沼",
+      "car": "-"
+    },
+    {
+      "hour": 12,
+      "minute": 50,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成佐倉",
+      "car": "-"
+    },
+    {
+      "hour": 13,
+      "minute": 0,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成津田沼",
+      "car": "-"
+    },
+    {
+      "hour": 13,
+      "minute": 10,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成津田沼",
+      "car": "-"
+    },
+    {
+      "hour": 13,
+      "minute": 20,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成津田沼",
+      "car": "-"
+    },
+    {
+      "hour": 13,
+      "minute": 30,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成佐倉",
+      "car": "-"
+    },
+    {
+      "hour": 13,
+      "minute": 40,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成津田沼",
+      "car": "-"
+    },
+    {
+      "hour": 13,
+      "minute": 50,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成津田沼",
+      "car": "-"
+    },
+    {
+      "hour": 14,
+      "minute": 0,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成津田沼",
+      "car": "-"
+    },
+    {
+      "hour": 14,
+      "minute": 10,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成佐倉",
+      "car": "-"
+    },
+    {
+      "hour": 14,
+      "minute": 20,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成津田沼",
+      "car": "-"
+    },
+    {
+      "hour": 14,
+      "minute": 30,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成津田沼",
+      "car": "-"
+    },
+    {
+      "hour": 14,
+      "minute": 40,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成津田沼",
+      "car": "-"
+    },
+    {
+      "hour": 14,
+      "minute": 50,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成臼井",
+      "car": "-"
+    },
+    {
+      "hour": 15,
+      "minute": 0,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成津田沼",
+      "car": "-"
+    },
+    {
+      "hour": 15,
+      "minute": 10,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成臼井",
+      "car": "-"
+    },
+    {
+      "hour": 15,
+      "minute": 20,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成津田沼",
+      "car": "-"
+    },
+    {
+      "hour": 15,
+      "minute": 30,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成臼井",
+      "car": "-"
+    },
+    {
+      "hour": 15,
+      "minute": 40,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成津田沼",
+      "car": "-"
+    },
+    {
+      "hour": 15,
+      "minute": 50,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成津田沼",
+      "car": "-"
+    },
+    {
+      "hour": 16,
+      "minute": 0,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成臼井",
+      "car": "-"
+    },
+    {
+      "hour": 16,
+      "minute": 9,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "千葉中央",
+      "car": "-"
+    },
+    {
+      "hour": 16,
+      "minute": 18,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成臼井",
+      "car": "-"
+    },
+    {
+      "hour": 16,
+      "minute": 28,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "ちはら台",
+      "car": "-"
+    },
+    {
+      "hour": 16,
+      "minute": 37,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成臼井",
+      "car": "-"
+    },
+    {
+      "hour": 16,
+      "minute": 48,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "ちはら台",
+      "car": "-"
+    },
+    {
+      "hour": 16,
+      "minute": 58,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成臼井",
+      "car": "-"
+    },
+    {
+      "hour": 17,
+      "minute": 9,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "千葉中央",
+      "car": "-"
+    },
+    {
+      "hour": 17,
+      "minute": 17,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成成田",
+      "car": "-"
+    },
+    {
+      "hour": 17,
+      "minute": 28,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成佐倉",
+      "car": "-"
+    },
+    {
+      "hour": 17,
+      "minute": 37,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "芝山千代田",
+      "car": "-"
+    },
+    {
+      "hour": 17,
+      "minute": 47,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成佐倉",
+      "car": "-"
+    },
+    {
+      "hour": 17,
+      "minute": 57,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成成田",
+      "car": "-"
+    },
+    {
+      "hour": 18,
+      "minute": 8,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成佐倉",
+      "car": "-"
+    },
+    {
+      "hour": 18,
+      "minute": 17,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成成田",
+      "car": "-"
+    },
+    {
+      "hour": 18,
+      "minute": 23,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成佐倉",
+      "car": "-"
+    },
+    {
+      "hour": 18,
+      "minute": 33,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成成田",
+      "car": "-"
+    },
+    {
+      "hour": 18,
+      "minute": 43,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成佐倉",
+      "car": "-"
+    },
+    {
+      "hour": 18,
+      "minute": 54,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "芝山千代田",
+      "car": "-"
+    },
+    {
+      "hour": 19,
+      "minute": 10,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "宗吾参道",
+      "car": "-"
+    },
+    {
+      "hour": 19,
+      "minute": 20,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成成田",
+      "car": "-"
+    },
+    {
+      "hour": 19,
+      "minute": 31,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成佐倉",
+      "car": "-"
+    },
+    {
+      "hour": 19,
+      "minute": 42,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "千葉中央",
+      "car": "-"
+    },
+    {
+      "hour": 19,
+      "minute": 52,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成佐倉",
+      "car": "-"
+    },
+    {
+      "hour": 20,
+      "minute": 1,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成佐倉",
+      "car": "-"
+    },
+    {
+      "hour": 20,
+      "minute": 10,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "ちはら台",
+      "car": "-"
+    },
+    {
+      "hour": 20,
+      "minute": 19,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "千葉中央",
+      "car": "-"
+    },
+    {
+      "hour": 20,
+      "minute": 31,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "宗吾参道",
+      "car": "-"
+    },
+    {
+      "hour": 20,
+      "minute": 41,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "成田空港",
+      "car": "-"
+    },
+    {
+      "hour": 20,
+      "minute": 50,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "ちはら台",
+      "car": "-"
+    },
+    {
+      "hour": 21,
+      "minute": 0,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成佐倉",
+      "car": "-"
+    },
+    {
+      "hour": 21,
+      "minute": 10,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "成田空港",
+      "car": "-"
+    },
+    {
+      "hour": 21,
+      "minute": 24,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "ちはら台",
+      "car": "-"
+    },
+    {
+      "hour": 21,
+      "minute": 33,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "宗吾参道",
+      "car": "-"
+    },
+    {
+      "hour": 21,
+      "minute": 43,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "宗吾参道",
+      "car": "-"
+    },
+    {
+      "hour": 21,
+      "minute": 54,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "ちはら台",
+      "car": "-"
+    },
+    {
+      "hour": 22,
+      "minute": 3,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成佐倉",
+      "car": "-"
+    },
+    {
+      "hour": 22,
+      "minute": 12,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "千葉中央",
+      "car": "-"
+    },
+    {
+      "hour": 22,
+      "minute": 24,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "ちはら台",
+      "car": "-"
+    },
+    {
+      "hour": 22,
+      "minute": 32,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "宗吾参道",
+      "car": "-"
+    },
+    {
+      "hour": 22,
+      "minute": 42,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成津田沼",
+      "car": "-"
+    },
+    {
+      "hour": 22,
+      "minute": 54,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "千葉中央",
+      "car": "-"
+    },
+    {
+      "hour": 23,
+      "minute": 6,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "ちはら台",
+      "car": "-"
+    },
+    {
+      "hour": 23,
+      "minute": 17,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "千葉中央",
+      "car": "-"
+    },
+    {
+      "hour": 23,
+      "minute": 35,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成成田",
+      "car": "-"
+    },
+    {
+      "hour": 23,
+      "minute": 53,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成津田沼",
+      "car": "-"
+    },
+    {
+      "hour": 0,
+      "minute": 17,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成津田沼",
+      "car": "-"
+    }
+  ],
+  "holiday": [
+    {
+      "hour": 5,
+      "minute": 7,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "成田空港",
+      "car": "-"
+    },
+    {
+      "hour": 5,
+      "minute": 28,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "成田空港",
+      "car": "-"
+    },
+    {
+      "hour": 5,
+      "minute": 53,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "成田空港",
+      "car": "-"
+    },
+    {
+      "hour": 6,
+      "minute": 13,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成成田",
+      "car": "-"
+    },
+    {
+      "hour": 6,
+      "minute": 26,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "ちはら台",
+      "car": "-"
+    },
+    {
+      "hour": 6,
+      "minute": 43,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成成田",
+      "car": "-"
+    },
+    {
+      "hour": 6,
+      "minute": 53,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成臼井",
+      "car": "-"
+    },
+    {
+      "hour": 7,
+      "minute": 2,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "芝山千代田",
+      "car": "-"
+    },
+    {
+      "hour": 7,
+      "minute": 13,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成佐倉",
+      "car": "-"
+    },
+    {
+      "hour": 7,
+      "minute": 26,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成成田",
+      "car": "-"
+    },
+    {
+      "hour": 7,
+      "minute": 35,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "芝山千代田",
+      "car": "-"
+    },
+    {
+      "hour": 7,
+      "minute": 43,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成大和田",
+      "car": "-"
+    },
+    {
+      "hour": 7,
+      "minute": 54,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "宗吾参道",
+      "car": "-"
+    },
+    {
+      "hour": 8,
+      "minute": 5,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成津田沼",
+      "car": "-"
+    },
+    {
+      "hour": 8,
+      "minute": 15,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成臼井",
+      "car": "-"
+    },
+    {
+      "hour": 8,
+      "minute": 27,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "宗吾参道",
+      "car": "-"
+    },
+    {
+      "hour": 8,
+      "minute": 38,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成臼井",
+      "car": "-"
+    },
+    {
+      "hour": 8,
+      "minute": 48,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成津田沼",
+      "car": "-"
+    },
+    {
+      "hour": 8,
+      "minute": 57,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成臼井",
+      "car": "-"
+    },
+    {
+      "hour": 9,
+      "minute": 6,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成津田沼",
+      "car": "-"
+    },
+    {
+      "hour": 9,
+      "minute": 17,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成津田沼",
+      "car": "-"
+    },
+    {
+      "hour": 9,
+      "minute": 29,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成佐倉",
+      "car": "-"
+    },
+    {
+      "hour": 9,
+      "minute": 41,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成津田沼",
+      "car": "-"
+    },
+    {
+      "hour": 9,
+      "minute": 50,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成津田沼",
+      "car": "-"
+    },
+    {
+      "hour": 10,
+      "minute": 0,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成津田沼",
+      "car": "-"
+    },
+    {
+      "hour": 10,
+      "minute": 9,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成佐倉",
+      "car": "-"
+    },
+    {
+      "hour": 10,
+      "minute": 20,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成津田沼",
+      "car": "-"
+    },
+    {
+      "hour": 10,
+      "minute": 30,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成津田沼",
+      "car": "-"
+    },
+    {
+      "hour": 10,
+      "minute": 40,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成津田沼",
+      "car": "-"
+    },
+    {
+      "hour": 10,
+      "minute": 50,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成佐倉",
+      "car": "-"
+    },
+    {
+      "hour": 11,
+      "minute": 0,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成津田沼",
+      "car": "-"
+    },
+    {
+      "hour": 11,
+      "minute": 10,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成津田沼",
+      "car": "-"
+    },
+    {
+      "hour": 11,
+      "minute": 20,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成津田沼",
+      "car": "-"
+    },
+    {
+      "hour": 11,
+      "minute": 30,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成佐倉",
+      "car": "-"
+    },
+    {
+      "hour": 11,
+      "minute": 40,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成津田沼",
+      "car": "-"
+    },
+    {
+      "hour": 11,
+      "minute": 50,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成津田沼",
+      "car": "-"
+    },
+    {
+      "hour": 12,
+      "minute": 0,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成津田沼",
+      "car": "-"
+    },
+    {
+      "hour": 12,
+      "minute": 10,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成佐倉",
+      "car": "-"
+    },
+    {
+      "hour": 12,
+      "minute": 20,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成津田沼",
+      "car": "-"
+    },
+    {
+      "hour": 12,
+      "minute": 30,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成津田沼",
+      "car": "-"
+    },
+    {
+      "hour": 12,
+      "minute": 40,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成津田沼",
+      "car": "-"
+    },
+    {
+      "hour": 12,
+      "minute": 50,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成佐倉",
+      "car": "-"
+    },
+    {
+      "hour": 13,
+      "minute": 0,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成津田沼",
+      "car": "-"
+    },
+    {
+      "hour": 13,
+      "minute": 10,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成津田沼",
+      "car": "-"
+    },
+    {
+      "hour": 13,
+      "minute": 20,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成津田沼",
+      "car": "-"
+    },
+    {
+      "hour": 13,
+      "minute": 30,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成佐倉",
+      "car": "-"
+    },
+    {
+      "hour": 13,
+      "minute": 40,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成津田沼",
+      "car": "-"
+    },
+    {
+      "hour": 13,
+      "minute": 50,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成津田沼",
+      "car": "-"
+    },
+    {
+      "hour": 14,
+      "minute": 0,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成津田沼",
+      "car": "-"
+    },
+    {
+      "hour": 14,
+      "minute": 10,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成佐倉",
+      "car": "-"
+    },
+    {
+      "hour": 14,
+      "minute": 20,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成津田沼",
+      "car": "-"
+    },
+    {
+      "hour": 14,
+      "minute": 30,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成津田沼",
+      "car": "-"
+    },
+    {
+      "hour": 14,
+      "minute": 40,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成津田沼",
+      "car": "-"
+    },
+    {
+      "hour": 14,
+      "minute": 50,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成佐倉",
+      "car": "-"
+    },
+    {
+      "hour": 15,
+      "minute": 0,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成津田沼",
+      "car": "-"
+    },
+    {
+      "hour": 15,
+      "minute": 10,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成津田沼",
+      "car": "-"
+    },
+    {
+      "hour": 15,
+      "minute": 20,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成津田沼",
+      "car": "-"
+    },
+    {
+      "hour": 15,
+      "minute": 30,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成佐倉",
+      "car": "-"
+    },
+    {
+      "hour": 15,
+      "minute": 40,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成津田沼",
+      "car": "-"
+    },
+    {
+      "hour": 15,
+      "minute": 50,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成津田沼",
+      "car": "-"
+    },
+    {
+      "hour": 16,
+      "minute": 0,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成津田沼",
+      "car": "-"
+    },
+    {
+      "hour": 16,
+      "minute": 10,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成佐倉",
+      "car": "-"
+    },
+    {
+      "hour": 16,
+      "minute": 20,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成津田沼",
+      "car": "-"
+    },
+    {
+      "hour": 16,
+      "minute": 29,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成津田沼",
+      "car": "-"
+    },
+    {
+      "hour": 16,
+      "minute": 40,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成津田沼",
+      "car": "-"
+    },
+    {
+      "hour": 16,
+      "minute": 50,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成臼井",
+      "car": "-"
+    },
+    {
+      "hour": 17,
+      "minute": 0,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成津田沼",
+      "car": "-"
+    },
+    {
+      "hour": 17,
+      "minute": 10,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "ちはら台",
+      "car": "-"
+    },
+    {
+      "hour": 17,
+      "minute": 20,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "千葉中央",
+      "car": "-"
+    },
+    {
+      "hour": 17,
+      "minute": 30,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成臼井",
+      "car": "-"
+    },
+    {
+      "hour": 17,
+      "minute": 40,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "ちはら台",
+      "car": "-"
+    },
+    {
+      "hour": 17,
+      "minute": 50,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成成田",
+      "car": "-"
+    },
+    {
+      "hour": 18,
+      "minute": 0,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "ちはら台",
+      "car": "-"
+    },
+    {
+      "hour": 18,
+      "minute": 9,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成臼井",
+      "car": "-"
+    },
+    {
+      "hour": 18,
+      "minute": 18,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "ちはら台",
+      "car": "-"
+    },
+    {
+      "hour": 18,
+      "minute": 26,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成成田",
+      "car": "-"
+    },
+    {
+      "hour": 18,
+      "minute": 40,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "千葉中央",
+      "car": "-"
+    },
+    {
+      "hour": 18,
+      "minute": 49,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成臼井",
+      "car": "-"
+    },
+    {
+      "hour": 18,
+      "minute": 58,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "千葉中央",
+      "car": "-"
+    },
+    {
+      "hour": 19,
+      "minute": 6,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成成田",
+      "car": "-"
+    },
+    {
+      "hour": 19,
+      "minute": 20,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "ちはら台",
+      "car": "-"
+    },
+    {
+      "hour": 19,
+      "minute": 29,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成臼井",
+      "car": "-"
+    },
+    {
+      "hour": 19,
+      "minute": 37,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "ちはら台",
+      "car": "-"
+    },
+    {
+      "hour": 19,
+      "minute": 46,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "千葉中央",
+      "car": "-"
+    },
+    {
+      "hour": 20,
+      "minute": 0,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "ちはら台",
+      "car": "-"
+    },
+    {
+      "hour": 20,
+      "minute": 8,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "宗吾参道",
+      "car": "-"
+    },
+    {
+      "hour": 20,
+      "minute": 18,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成佐倉",
+      "car": "-"
+    },
+    {
+      "hour": 20,
+      "minute": 30,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "千葉中央",
+      "car": "-"
+    },
+    {
+      "hour": 20,
+      "minute": 40,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "ちはら台",
+      "car": "-"
+    },
+    {
+      "hour": 20,
+      "minute": 51,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "ちはら台",
+      "car": "-"
+    },
+    {
+      "hour": 21,
+      "minute": 2,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "芝山千代田",
+      "car": "-"
+    },
+    {
+      "hour": 21,
+      "minute": 8,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成佐倉",
+      "car": "-"
+    },
+    {
+      "hour": 21,
+      "minute": 17,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "成田空港",
+      "car": "-"
+    },
+    {
+      "hour": 21,
+      "minute": 31,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "千葉中央",
+      "car": "-"
+    },
+    {
+      "hour": 21,
+      "minute": 42,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "成田空港",
+      "car": "-"
+    },
+    {
+      "hour": 21,
+      "minute": 48,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "ちはら台",
+      "car": "-"
+    },
+    {
+      "hour": 22,
+      "minute": 1,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成成田",
+      "car": "-"
+    },
+    {
+      "hour": 22,
+      "minute": 8,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "宗吾参道",
+      "car": "-"
+    },
+    {
+      "hour": 22,
+      "minute": 23,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "千葉中央",
+      "car": "-"
+    },
+    {
+      "hour": 22,
+      "minute": 40,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "ちはら台",
+      "car": "-"
+    },
+    {
+      "hour": 22,
+      "minute": 54,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "成田空港",
+      "car": "-"
+    },
+    {
+      "hour": 23,
+      "minute": 4,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "千葉中央",
+      "car": "-"
+    },
+    {
+      "hour": 23,
+      "minute": 18,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "千葉中央",
+      "car": "-"
+    },
+    {
+      "hour": 23,
+      "minute": 40,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成成田",
+      "car": "-"
+    },
+    {
+      "hour": 23,
+      "minute": 54,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成津田沼",
+      "car": "-"
+    },
+    {
+      "hour": 0,
+      "minute": 17,
+      "type_raw": "普通",
+      "type_class": "type-local",
+      "dest": "京成津田沼",
+      "car": "-"
+    }
+  ]
+}
