@@ -18,15 +18,30 @@
             display: flex;
             flex-direction: column;
             box-sizing: border-box;
-            user-select: none; /* Prevent text selection on touch */
+            user-select: none;
+            cursor: none; /* Hide cursor by default */
         }
 
-        /* Top Control Bar (Hidden in Fullscreen usually, or styled minimally) */
+        /* Interaction State */
+        body.interacting {
+            cursor: default;
+        }
+
+        /* Top Control Bar - Auto Hiding */
         #controls {
             display: flex;
             gap: 10px;
             margin-bottom: 15px;
             z-index: 100;
+            opacity: 0; /* Hidden by default */
+            transition: opacity 0.5s ease-in-out;
+            pointer-events: none; /* Prevent clicks when hidden */
+        }
+
+        /* Show controls when body has 'interacting' class */
+        body.interacting #controls {
+            opacity: 1;
+            pointer-events: auto;
         }
 
         select, button {
@@ -40,43 +55,38 @@
         }
         
         button:active { background: #444; }
-        
         #station-selector { flex-grow: 1; }
 
-        /* Clock & Header Area */
+        /* Clock Area */
         #top-bar {
             display: flex;
-            justify-content: space-between;
+            justify-content: flex-end; /* Right aligned */
             align-items: flex-end;
             border-bottom: 2px solid #444;
             padding-bottom: 5px;
-            margin-bottom: 5px;
-        }
-
-        #direction-display {
-            font-size: 3vw;
-            color: #0f0; /* Green for direction */
-            text-shadow: 0 0 5px rgba(0,255,0,0.5);
+            margin-bottom: 15px;
         }
 
         #clock-container {
-            font-size: 4vw;
+            font-size: 5vw;
             color: #fff;
             text-shadow: 0 0 5px rgba(255,255,255,0.5);
+            line-height: 1;
         }
 
-        /* The Board Itself */
+        /* The Board Frame */
         .board-frame {
             flex-grow: 1;
             display: flex;
             flex-direction: column;
             border: 3px solid #333;
-            background: #050505; /* Very dark grey, not pure black */
-            padding: 10px;
+            background: #050505;
+            padding: 10px 20px;
             position: relative;
+            justify-content: space-evenly; /* Distribute rows evenly */
         }
 
-        /* Scanline effect (optional, adds realism) */
+        /* Scanline effect */
         .board-frame::after {
             content: " ";
             display: block;
@@ -93,34 +103,31 @@
             display: flex;
             align-items: center;
             border-bottom: 1px dashed #333;
-            padding: 1.5vh 0;
-            font-size: 4.5vw;
-            line-height: 1.1;
+            padding: 1vh 0;
+            font-size: 6vw; /* Larger font for 2 rows */
+            line-height: 1.2;
         }
         
         .header-row {
             font-size: 2.5vw;
             color: #888;
             border-bottom: 2px solid #555;
-            padding-bottom: 5px;
-            padding-top: 5px;
+            padding-bottom: 10px;
         }
 
-        /* Column Widths */
+        /* Column Widths (Adjusted for removal of car count) */
+        .col-dir  { width: 10%; font-size: 0.6em; color: #aaa; text-align: left;} /* Tiny indicator for Up/Down */
         .col-type { width: 25%; text-align: center; }
-        .col-time { width: 20%; text-align: center; letter-spacing: 2px; }
-        .col-dest { width: 40%; padding-left: 20px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .col-car  { width: 15%; text-align: right; font-size: 0.8em; padding-right: 10px;}
+        .col-time { width: 25%; text-align: center; letter-spacing: 2px; }
+        .col-dest { width: 40%; text-align: right; padding-right: 10px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
-        /* Train Types Colors */
-        .type-express { color: #ff3333; text-shadow: 0 0 8px #ff0000; } /* Express: Red */
-        .type-rapid   { color: #ff8800; text-shadow: 0 0 8px #ff6600; } /* Rapid: Orange */
-        .type-local   { color: #00cc00; text-shadow: 0 0 8px #00ff00; } /* Local: Green */
-        
-        /* LED Text Glow */
+        /* Colors */
+        .type-express { color: #ff3333; text-shadow: 0 0 8px #ff0000; }
+        .type-rapid   { color: #ff8800; text-shadow: 0 0 8px #ff6600; }
+        .type-local   { color: #00cc00; text-shadow: 0 0 8px #00ff00; }
         .led-text { text-shadow: 0 0 3px currentColor; }
         
-        /* Hint text at bottom */
+        /* Hint text */
         #hint {
             position: fixed;
             bottom: 5px;
@@ -129,10 +136,11 @@
             font-size: 12px;
             color: #444;
             pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.5s;
         }
+        body.interacting #hint { opacity: 1; }
 
-        /* Hide controls in fullscreen if desired, or toggle with a class */
-        /* body.fullscreen #controls { display: none; } */
     </style>
 </head>
 <body>
@@ -141,244 +149,202 @@
         <select id="station-selector">
             <option>Loading Stations...</option>
         </select>
-        <button id="toggle-btn" onclick="toggleDirection()">方面切替</button>
         <button onclick="toggleFullScreen()" style="font-size:1rem;">⛶</button>
     </div>
 
     <div id="top-bar">
-        <div id="direction-display">Loading...</div>
         <div id="clock-container">--:--</div>
     </div>
 
     <div class="board-frame">
         <div class="train-row header-row">
-            <div class="col-type">種別</div>
+            <div class="col-dir"></div> <div class="col-type">種別</div>
             <div class="col-time">時刻</div>
             <div class="col-dest">行先</div>
-            <div class="col-car">両数</div>
         </div>
 
-        <div id="schedule-list">
-            </div>
+        <div id="row-d1" class="train-row led-text">
+            <div class="col-dir">上り</div>
+            <div class="col-type">---</div>
+            <div class="col-time">--:--</div>
+            <div class="col-dest">---</div>
+        </div>
+
+        <div id="row-d2" class="train-row led-text">
+            <div class="col-dir">下り</div>
+            <div class="col-type">---</div>
+            <div class="col-time">--:--</div>
+            <div class="col-dest">---</div>
+        </div>
     </div>
 
-    <div id="hint">画面タップでフルスクリーン</div>
+    <div id="hint">画面タップで操作パネル表示</div>
 
 <script>
     // --- APP STATE ---
     let allData = {};
-    let currentStationCode = "254-11"; // Default: Edogawa (matches JSON key)
-    let currentDirection = "d1";       // Default: Direction 1 (Up/Ueno usually)
-    let reloadTimer = null;
+    let currentStationCode = "254-11"; // Edogawa default
+    let hideControlsTimer = null;
 
     // --- INITIALIZATION ---
     window.onload = function() {
         fetchTimetable();
-        // Update clock every second
         setInterval(updateClock, 1000);
-        // Refresh display (to remove passed trains) every 30 seconds
         setInterval(updateBoard, 30000);
-        // Re-fetch data every 1 hour (to get next day's data if needed, or if updated)
         setInterval(fetchTimetable, 3600000);
+        
+        // Init user interaction handler
+        setupInteractionHandler();
     };
+
+    // --- AUTO HIDE CONTROLS ---
+    function setupInteractionHandler() {
+        const resetTimer = () => {
+            document.body.classList.add('interacting');
+            clearTimeout(hideControlsTimer);
+            hideControlsTimer = setTimeout(() => {
+                document.body.classList.remove('interacting');
+            }, 3000); // Hide after 3 seconds
+        };
+
+        // Listen for any movement or touch
+        window.addEventListener('mousemove', resetTimer);
+        window.addEventListener('mousedown', resetTimer);
+        window.addEventListener('touchstart', resetTimer);
+        window.addEventListener('click', resetTimer);
+        
+        // Initial trigger
+        resetTimer();
+    }
 
     // --- DATA FETCHING ---
     async function fetchTimetable() {
         try {
-            // Append timestamp to prevent caching
             const response = await fetch('./keisei_full_timetable.json?' + new Date().getTime());
             if (!response.ok) throw new Error('Network response was not ok');
-            
             allData = await response.json();
-            console.log("Data loaded", Object.keys(allData).length + " stations");
-
             populateStationSelector();
             updateBoard();
-
         } catch (error) {
-            console.error("Fetch error:", error);
-            document.getElementById('schedule-list').innerHTML = 
-                '<div style="text-align:center; padding:30px; color:red;">データ読込失敗<br>Retrying...</div>';
-            setTimeout(fetchTimetable, 5000); // Retry in 5s
+            console.error(error);
         }
     }
 
     // --- UI LOGIC ---
     function populateStationSelector() {
         const selector = document.getElementById('station-selector');
-        // Save current selection if re-populating
         const previousValue = selector.value;
         selector.innerHTML = '';
 
-        // Sort stations by ID for consistent ordering (or name)
         const sortedKeys = Object.keys(allData).sort();
 
         sortedKeys.forEach(key => {
             const station = allData[key];
             const option = document.createElement('option');
             option.value = key;
-            option.text = station.name; // "StationName (LineName)"
+            option.text = station.name; 
             if (key === currentStationCode) option.selected = true;
             selector.appendChild(option);
         });
 
-        // Restore if possible
-        if (previousValue && allData[previousValue]) {
-            selector.value = previousValue;
-        }
+        if (previousValue && allData[previousValue]) selector.value = previousValue;
 
-        // Add Change Listener
         selector.onchange = function() {
             currentStationCode = this.value;
-            // Optional: Reset to d1 when changing station?
-            // currentDirection = "d1"; 
             updateBoard();
         };
-    }
-
-    function toggleDirection() {
-        currentDirection = (currentDirection === "d1") ? "d2" : "d1";
-        updateBoard();
     }
 
     // --- CORE LOGIC ---
     function getDayType(date) {
         const day = date.getDay();
-        // 0 is Sunday, 6 is Saturday
-        if (day === 0 || day === 6) return 'holiday';
-        return 'weekday';
+        return (day === 0 || day === 6) ? 'holiday' : 'weekday';
+    }
+
+    function findNextTrain(trainList, currentHour, currentMin) {
+        if (!trainList) return null;
+
+        // Calculate current time in minutes (handle 0-2AM as 24-26)
+        let curH = currentHour;
+        if (curH < 3) curH += 24;
+        const curTotal = curH * 60 + currentMin;
+
+        for (let t of trainList) {
+            let tH = t.hour;
+            if (tH < 3) tH += 24;
+            const tTotal = tH * 60 + t.minute;
+
+            if (tTotal >= curTotal) {
+                return t;
+            }
+        }
+        return null;
+    }
+
+    function renderRow(elementId, train) {
+        const el = document.getElementById(elementId);
+        if (!train) {
+            // No train found
+            el.querySelector('.col-type').className = 'col-type'; // remove colors
+            el.querySelector('.col-type').textContent = "---";
+            el.querySelector('.col-time').textContent = "";
+            el.querySelector('.col-dest').textContent = "運転終了";
+            return;
+        }
+
+        const hStr = String(train.hour).padStart(2, '0');
+        const mStr = String(train.minute).padStart(2, '0');
+
+        // Type
+        const typeEl = el.querySelector('.col-type');
+        typeEl.className = `col-type ${train.type_class}`; // Apply color class
+        typeEl.textContent = train.type_raw;
+
+        // Time
+        el.querySelector('.col-time').textContent = `${hStr}:${mStr}`;
+
+        // Dest
+        el.querySelector('.col-dest').textContent = train.dest;
     }
 
     function updateBoard() {
         const now = new Date();
         const currentHour = now.getHours();
         const currentMin = now.getMinutes();
+        const dayType = getDayType(now);
 
-        // 1. Get Station Data
         const station = allData[currentStationCode];
         if (!station) return;
 
-        // 2. Get Direction Data
-        const dirObj = station[currentDirection];
-        
-        // Handle Missing Direction (some stations are terminuses)
-        if (!dirObj || !dirObj.name) {
-            document.getElementById('direction-display').textContent = "---";
-            document.getElementById('schedule-list').innerHTML = 
-                '<div style="text-align:center; padding:30px; color:#888;">この方面の電車はありません</div>';
-            return;
+        // --- ROW 1 (Direction 1) ---
+        let d1Train = null;
+        if (station.d1 && station.d1[dayType]) {
+            d1Train = findNextTrain(station.d1[dayType], currentHour, currentMin);
         }
+        renderRow('row-d1', d1Train);
 
-        // Update Header
-        document.getElementById('direction-display').textContent = dirObj.name;
-
-        // 3. Filter Trains
-        const dayType = getDayType(now);
-        // The JSON structure: station -> d1 -> weekday -> [list]
-        const trainList = (dirObj[dayType]) ? dirObj[dayType] : [];
-
-        // Logic for "Next Trains"
-        // Railway hours: 0, 1, 2 AM are treated as 24, 25, 26 for sorting purposes in the JSON usually,
-        // but our JSON has them as 0, 1, 2.
-        // We need to normalize "Current Time" vs "Train Time".
-        
-        // Calculate current time in minutes from midnight (0:00)
-        // If current hour is 0, 1, 2, we treat it as next day physically, 
-        // but for comparison, let's just stick to minutes.
-        let nowMinutes = currentHour * 60 + currentMin;
-        
-        // Special logic: If it's late night (e.g. 00:15), we want to show 00:30 trains.
-        // But if it's 23:50, we want to show 00:10 trains (next day).
-        // Since our JSON is sorted (0 comes first), we need to handle the wrap-around.
-        
-        // Simpler approach:
-        // Filter trains where (Hour*60 + Min) >= CurrentTime
-        // IF CurrentTime is late (e.g. > 23:00), we might need to look at trains with hour 0, 1.
-        // In the JSON, hour 0 is usually stored as 0. 
-        // We will create a "comparable minutes" value.
-        
-        const nextTrains = trainList.filter(t => {
-            // Normalize Train Time
-            let tH = t.hour;
-            // If train is 0, 1, 2, treat as 24, 25, 26 for comparison if it helps sorting
-            if (tH < 3) tH += 24;
-
-            // Normalize Current Time
-            let curH = currentHour;
-            if (curH < 3) curH += 24;
-
-            const tTotal = tH * 60 + t.minute;
-            const curTotal = curH * 60 + currentMin;
-
-            return tTotal >= curTotal;
-        });
-
-        // 4. Render HTML
-        const displayCount = 3; // Show 3 rows
-        const trainsToShow = nextTrains.slice(0, displayCount);
-        let html = '';
-
-        if (trainsToShow.length === 0) {
-            html = '<div style="text-align:center; padding:30px; color:#888;">本日の運転は終了しました<br>(End of Service)</div>';
-        } else {
-            trainsToShow.forEach(t => {
-                // Formatting time: pad with 0 (e.g. 9:5 -> 09:05)
-                const hStr = String(t.hour).padStart(2, '0');
-                const mStr = String(t.minute).padStart(2, '0');
-                
-                // Determine Car count (not in data, placeholder or random)
-                // Since scraping didn't get cars, we leave it blank or put "-";
-                const carStr = t.car ? t.car : "-";
-
-                html += `
-                    <div class="train-row led-text">
-                        <div class="col-type ${t.type_class}">${t.type_raw}</div>
-                        <div class="col-time" style="color:#ffb700;">${hStr}:${mStr}</div>
-                        <div class="col-dest" style="color:#ffb700;">${t.dest}</div>
-                        <div class="col-car"  style="color:#00cc00;">${carStr}</div>
-                    </div>
-                `;
-            });
-            
-            // Fill empty rows if less than 3 trains
-            for (let i = trainsToShow.length; i < displayCount; i++) {
-                html += `
-                    <div class="train-row">
-                        <div class="col-type"></div>
-                        <div class="col-time"></div>
-                        <div class="col-dest"></div>
-                        <div class="col-car"></div>
-                    </div>
-                `;
-            }
+        // --- ROW 2 (Direction 2) ---
+        let d2Train = null;
+        if (station.d2 && station.d2[dayType]) {
+            d2Train = findNextTrain(station.d2[dayType], currentHour, currentMin);
         }
-
-        document.getElementById('schedule-list').innerHTML = html;
+        renderRow('row-d2', d2Train);
     }
 
     function updateClock() {
         const now = new Date();
         const h = String(now.getHours()).padStart(2, '0');
         const m = String(now.getMinutes()).padStart(2, '0');
-        // Optional seconds styling
-        // const s = String(now.getSeconds()).padStart(2, '0');
         document.getElementById('clock-container').innerHTML = `${h}:${m}`;
     }
 
     function toggleFullScreen() {
         if (!document.fullscreenElement) {
             document.documentElement.requestFullscreen();
-            document.body.classList.add('fullscreen');
         } else {
-            if (document.exitFullscreen) {
-                document.exitFullscreen();
-                document.body.classList.remove('fullscreen');
-            }
+            if (document.exitFullscreen) document.exitFullscreen();
         }
     }
-
-    // Double tap or click background to toggle fullscreen
-    document.querySelector('.board-frame').addEventListener('dblclick', toggleFullScreen);
 </script>
 </body>
 </html>
