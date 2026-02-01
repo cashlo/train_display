@@ -43,6 +43,6 @@ jobs:
         run: |
           git config --global user.name 'GitHub Action'
           git config --global user.email 'action@github.com'
-          git add timetable.json
+          git add keisei_full_timetable.json
           # The following line checks if there are changes. If yes, it commits and pushes.
           git diff --quiet && git diff --staged --quiet || (git commit -m "Auto-update timetable json" && git push)

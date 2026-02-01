@@ -2,50 +2,102 @@ import requests
 from bs4 import BeautifulSoup
 import json
 import re
+import time
+import sys
 
-# 京成電鉄 江戸川駅 (成田空港・ちはら台方面)
-URL = "https://keisei.ekitan.com/search/timetable/station/254-11/d2"
+# Base URL for relative links
+BASE_URL = "https://keisei.ekitan.com"
+# The page listing all stations (Index page)
+INDEX_URL = "https://keisei.ekitan.com/search/timetable"
 
-# 表示色を決めるための種別マッピング
-TYPE_Mapping = {
+# Train type mapping for CSS classes
+TYPE_MAPPING = {
     "普通": "type-local",
     "快速": "type-rapid",
     "通勤特急": "type-express",
     "特急": "type-express",
     "アクセス特急": "type-express",
-    "快特": "type-express"
+    "快特": "type-express",
+    "ライナー": "type-express" # Skyliner etc
 }
 
-def fetch_data():
+def get_station_links():
+    """
+    Visits the main timetable index to find links to all individual stations.
+    """
+    print(f"Fetching station list from {INDEX_URL}...")
     try:
-        response = requests.get(URL)
-        response.raise_for_status()
-        response.encoding = response.apparent_encoding
+        resp = requests.get(INDEX_URL)
+        resp.raise_for_status()
+        resp.encoding = resp.apparent_encoding
+        soup = BeautifulSoup(resp.text, 'html.parser')
     except Exception as e:
-        print(f"Error fetching URL: {e}")
+        print(f"Failed to fetch index: {e}")
+        return {}
+
+    station_links = {}
+    
+    # Logic: Find links usually inside specific lists or tables on the index page.
+    # Looking at standard Ekitan structures, they are often in <li><a>...</a></li>
+    # We look for links containing '/search/timetable/station/'
+    
+    for a in soup.find_all('a', href=True):
+        href = a['href']
+        if '/search/timetable/station/' in href:
+            # Check if it's a specific direction link (ends in d1, d2) or a general station link
+            # We want the general station link or the first direction to start with.
+            # Usually the index links to ".../d1" or ".../index".
+            
+            # Example href: /search/timetable/station/254-11/d1
+            
+            name = a.text.strip()
+            # Clean up the name (remove extra spaces or newlines)
+            name = re.sub(r'\s+', ' ', name)
+            
+            # Use the station ID code from URL as key (e.g., "254-11")
+            match = re.search(r'station/([\d\-]+)', href)
+            if match:
+                station_id = match.group(1)
+                if station_id not in station_links:
+                     # Store full URL. If relative, prepend base.
+                    full_url = href if href.startswith('http') else BASE_URL + href
+                    # Remove the specific direction (d1/d2) to store a "base" station URL
+                    # We will append d1/d2 manually to ensure we get both.
+                    base_station_url = re.sub(r'/d\d+$', '', full_url)
+                    station_links[station_id] = {
+                        "name": name,
+                        "base_url": base_station_url
+                    }
+    
+    print(f"Found {len(station_links)} stations.")
+    return station_links
+
+def fetch_timetable_for_url(url):
+    """
+    Fetches and parses a single timetable page (e.g., Station X, Direction 1).
+    """
+    try:
+        resp = requests.get(url)
+        resp.raise_for_status()
+        resp.encoding = resp.apparent_encoding
+        soup = BeautifulSoup(resp.text, 'html.parser')
+    except Exception as e:
+        print(f"  Error fetching {url}: {e}")
         return None
 
-    soup = BeautifulSoup(response.text, 'html.parser')
-    
-    timetable = {
+    # Determine if list view exists
+    list_view = soup.find('div', {'v-show': 'isList'})
+    if not list_view:
+        return None
+
+    # Data structure for this specific direction
+    direction_data = {
         "weekday": [],
         "holiday": []
     }
 
-    # HTML内の構造: 
-    # 平日データ: <div v-show="isWeekday"> 内の <li class="ekltip">
-    # 土休日データ: <div v-show="isWeekend"> 内の <li class="ekltip">
-    
-    # リスト表示エリアを取得
-    list_view = soup.find('div', {'v-show': 'isList'})
-    if not list_view:
-        print("List view not found")
-        return None
-
-    # 平日と土休日のコンテナを特定
-    # v-show属性はBeautifulSoupではそのまま属性として取れます
+    # Helper to parse containers
     containers = list_view.find_all('div', recursive=False)
-    
     for container in containers:
         v_show = container.get('v-show')
         
@@ -56,49 +108,83 @@ def fetch_data():
             target_key = "holiday"
         
         if target_key:
-            # 電車リスト(li class="ekltip") を全て取得
             trains = container.find_all('li', class_='ekltip')
-            
             for train in trains:
-                # 時刻 (例: 5:07)
-                time_str = train.find('span', class_='ekldeptime').text.strip()
-                if ':' in time_str:
-                    hour, minute = map(int, time_str.split(':'))
-                else:
-                    continue # 時刻が取得できない場合はスキップ
-
-                # 種別 (例: 普通)
-                type_raw = train.find('span', class_='ekltraintype').text.strip()
+                # Time
+                time_span = train.find('span', class_='ekldeptime')
+                if not time_span: continue
+                time_str = time_span.text.strip()
+                if ':' not in time_str: continue
                 
-                # 行先 (例: 成田空港)
-                dest = train.find('span', class_='ekldest').text.strip()
+                h, m = map(int, time_str.split(':'))
                 
-                # 両数 (このページには両数情報がないため空文字または仮定)
-                # 詳細ページへのリンク引数には含まれている可能性がありますが、ここではスキップ
-                car = "-" 
+                # Type
+                type_span = train.find('span', class_='ekltraintype')
+                type_raw = type_span.text.strip() if type_span else "普通"
+                
+                # Dest
+                dest_span = train.find('span', class_='ekldest')
+                dest = dest_span.text.strip() if dest_span else ""
 
-                # データ格納
-                timetable[target_key].append({
-                    "hour": hour,
-                    "minute": minute,
+                direction_data[target_key].append({
+                    "hour": h,
+                    "minute": m,
                     "type_raw": type_raw,
-                    "type_class": TYPE_Mapping.get(type_raw, "type-local"),
-                    "dest": dest,
-                    "car": car
+                    "type_class": TYPE_MAPPING.get(type_raw, "type-local"),
+                    "dest": dest
                 })
+    
+    # Sort
+    for k in direction_data:
+        direction_data[k].sort(key=lambda x: (x['hour'] if x['hour'] >= 3 else x['hour'] + 24, x['minute']))
+        
+    return direction_data
 
-    return timetable
+def main():
+    all_data = {}
+    stations = get_station_links()
+    
+    # Loop through all found stations
+    for s_id, info in stations.items():
+        print(f"Processing {info['name']} ({s_id})...")
+        
+        station_result = {
+            "name": info['name'],
+            "id": s_id,
+            "d1": {}, # Direction 1 (usually Up)
+            "d2": {}  # Direction 2 (usually Down)
+        }
+
+        # Fetch Direction 1
+        url_d1 = f"{info['base_url']}/d1"
+        data_d1 = fetch_timetable_for_url(url_d1)
+        if data_d1:
+            station_result["d1"] = data_d1
+        else:
+            print("  No data for d1")
+        
+        # Be polite to server
+        time.sleep(0.5)
+
+        # Fetch Direction 2
+        url_d2 = f"{info['base_url']}/d2"
+        data_d2 = fetch_timetable_for_url(url_d2)
+        if data_d2:
+            station_result["d2"] = data_d2
+        else:
+             print("  No data for d2")
+
+        # Save to main dict
+        all_data[s_id] = station_result
+        
+        # Be polite
+        time.sleep(0.5)
+
+    # Save to file
+    with open('keisei_full_timetable.json', 'w', encoding='utf-8') as f:
+        json.dump(all_data, f, ensure_ascii=False, indent=2)
+    
+    print("Done! Saved to keisei_full_timetable.json")
 
 if __name__ == "__main__":
-    data = fetch_data()
-    if data:
-        # 時刻順に念のためソート（通常はサイト側で整列済み）
-        for key in data:
-            data[key].sort(key=lambda x: (x['hour'] if x['hour'] >= 3 else x['hour'] + 24, x['minute']))
-
-        with open('timetable.json', 'w', encoding='utf-8') as f:
-            json.dump(data, f, ensure_ascii=False, indent=2)
-        print("Success: timetable.json created.")
-    else:
-        print("Failed to fetch data.")
-        exit(1)
+    main()
