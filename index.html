@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keisei Line Digital Signage</title>
+    <link href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap" rel="stylesheet">
+    <style>
+        /* --- CSS STYLING --- */
+        body {
+            background-color: #000;
+            color: #FFB700; /* Standard LED Orange */
+            font-family: 'DotGothic16', sans-serif;
+            margin: 0;
+            padding: 2vh 3vw;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            box-sizing: border-box;
+            user-select: none; /* Prevent text selection on touch */
+        }
+
+        /* Top Control Bar (Hidden in Fullscreen usually, or styled minimally) */
+        #controls {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            z-index: 100;
+        }
+
+        select, button {
+            background: #222;
+            color: #eee;
+            border: 1px solid #555;
+            padding: 8px 12px;
+            font-family: 'DotGothic16', sans-serif;
+            font-size: 1.2rem;
+            outline: none;
+        }
+        
+        button:active { background: #444; }
+        
+        #station-selector { flex-grow: 1; }
+
+        /* Clock & Header Area */
+        #top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            border-bottom: 2px solid #444;
+            padding-bottom: 5px;
+            margin-bottom: 5px;
+        }
+
+        #direction-display {
+            font-size: 3vw;
+            color: #0f0; /* Green for direction */
+            text-shadow: 0 0 5px rgba(0,255,0,0.5);
+        }
+
+        #clock-container {
+            font-size: 4vw;
+            color: #fff;
+            text-shadow: 0 0 5px rgba(255,255,255,0.5);
+        }
+
+        /* The Board Itself */
+        .board-frame {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            border: 3px solid #333;
+            background: #050505; /* Very dark grey, not pure black */
+            padding: 10px;
+            position: relative;
+        }
+
+        /* Scanline effect (optional, adds realism) */
+        .board-frame::after {
+            content: " ";
+            display: block;
+            position: absolute;
+            top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            z-index: 2;
+            background-size: 100% 2px, 3px 100%;
+            pointer-events: none;
+        }
+
+        /* Table Rows */
+        .train-row {
+            display: flex;
+            align-items: center;
+            border-bottom: 1px dashed #333;
+            padding: 1.5vh 0;
+            font-size: 4.5vw;
+            line-height: 1.1;
+        }
+        
+        .header-row {
+            font-size: 2.5vw;
+            color: #888;
+            border-bottom: 2px solid #555;
+            padding-bottom: 5px;
+            padding-top: 5px;
+        }
+
+        /* Column Widths */
+        .col-type { width: 25%; text-align: center; }
+        .col-time { width: 20%; text-align: center; letter-spacing: 2px; }
+        .col-dest { width: 40%; padding-left: 20px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .col-car  { width: 15%; text-align: right; font-size: 0.8em; padding-right: 10px;}
+
+        /* Train Types Colors */
+        .type-express { color: #ff3333; text-shadow: 0 0 8px #ff0000; } /* Express: Red */
+        .type-rapid   { color: #ff8800; text-shadow: 0 0 8px #ff6600; } /* Rapid: Orange */
+        .type-local   { color: #00cc00; text-shadow: 0 0 8px #00ff00; } /* Local: Green */
+        
+        /* LED Text Glow */
+        .led-text { text-shadow: 0 0 3px currentColor; }
+        
+        /* Hint text at bottom */
+        #hint {
+            position: fixed;
+            bottom: 5px;
+            width: 100%;
+            text-align: center;
+            font-size: 12px;
+            color: #444;
+            pointer-events: none;
+        }
+
+        /* Hide controls in fullscreen if desired, or toggle with a class */
+        /* body.fullscreen #controls { display: none; } */
+    </style>
+</head>
+<body>
+
+    <div id="controls">
+        <select id="station-selector">
+            <option>Loading Stations...</option>
+        </select>
+        <button id="toggle-btn" onclick="toggleDirection()">方面切替</button>
+        <button onclick="toggleFullScreen()" style="font-size:1rem;">⛶</button>
+    </div>
+
+    <div id="top-bar">
+        <div id="direction-display">Loading...</div>
+        <div id="clock-container">--:--</div>
+    </div>
+
+    <div class="board-frame">
+        <div class="train-row header-row">
+            <div class="col-type">種別</div>
+            <div class="col-time">時刻</div>
+            <div class="col-dest">行先</div>
+            <div class="col-car">両数</div>
+        </div>
+
+        <div id="schedule-list">
+            </div>
+    </div>
+
+    <div id="hint">画面タップでフルスクリーン</div>
+
+<script>
+    // --- APP STATE ---
+    let allData = {};
+    let currentStationCode = "254-11"; // Default: Edogawa (matches JSON key)
+    let currentDirection = "d1";       // Default: Direction 1 (Up/Ueno usually)
+    let reloadTimer = null;
+
+    // --- INITIALIZATION ---
+    window.onload = function() {
+        fetchTimetable();
+        // Update clock every second
+        setInterval(updateClock, 1000);
+        // Refresh display (to remove passed trains) every 30 seconds
+        setInterval(updateBoard, 30000);
+        // Re-fetch data every 1 hour (to get next day's data if needed, or if updated)
+        setInterval(fetchTimetable, 3600000);
+    };
+
+    // --- DATA FETCHING ---
+    async function fetchTimetable() {
+        try {
+            // Append timestamp to prevent caching
+            const response = await fetch('./keisei_full_timetable.json?' + new Date().getTime());
+            if (!response.ok) throw new Error('Network response was not ok');
+            
+            allData = await response.json();
+            console.log("Data loaded", Object.keys(allData).length + " stations");
+
+            populateStationSelector();
+            updateBoard();
+
+        } catch (error) {
+            console.error("Fetch error:", error);
+            document.getElementById('schedule-list').innerHTML = 
+                '<div style="text-align:center; padding:30px; color:red;">データ読込失敗<br>Retrying...</div>';
+            setTimeout(fetchTimetable, 5000); // Retry in 5s
+        }
+    }
+
+    // --- UI LOGIC ---
+    function populateStationSelector() {
+        const selector = document.getElementById('station-selector');
+        // Save current selection if re-populating
+        const previousValue = selector.value;
+        selector.innerHTML = '';
+
+        // Sort stations by ID for consistent ordering (or name)
+        const sortedKeys = Object.keys(allData).sort();
+
+        sortedKeys.forEach(key => {
+            const station = allData[key];
+            const option = document.createElement('option');
+            option.value = key;
+            option.text = station.name; // "StationName (LineName)"
+            if (key === currentStationCode) option.selected = true;
+            selector.appendChild(option);
+        });
+
+        // Restore if possible
+        if (previousValue && allData[previousValue]) {
+            selector.value = previousValue;
+        }
+
+        // Add Change Listener
+        selector.onchange = function() {
+            currentStationCode = this.value;
+            // Optional: Reset to d1 when changing station?
+            // currentDirection = "d1"; 
+            updateBoard();
+        };
+    }
+
+    function toggleDirection() {
+        currentDirection = (currentDirection === "d1") ? "d2" : "d1";
+        updateBoard();
+    }
+
+    // --- CORE LOGIC ---
+    function getDayType(date) {
+        const day = date.getDay();
+        // 0 is Sunday, 6 is Saturday
+        if (day === 0 || day === 6) return 'holiday';
+        return 'weekday';
+    }
+
+    function updateBoard() {
+        const now = new Date();
+        const currentHour = now.getHours();
+        const currentMin = now.getMinutes();
+
+        // 1. Get Station Data
+        const station = allData[currentStationCode];
+        if (!station) return;
+
+        // 2. Get Direction Data
+        const dirObj = station[currentDirection];
+        
+        // Handle Missing Direction (some stations are terminuses)
+        if (!dirObj || !dirObj.name) {
+            document.getElementById('direction-display').textContent = "---";
+            document.getElementById('schedule-list').innerHTML = 
+                '<div style="text-align:center; padding:30px; color:#888;">この方面の電車はありません</div>';
+            return;
+        }
+
+        // Update Header
+        document.getElementById('direction-display').textContent = dirObj.name;
+
+        // 3. Filter Trains
+        const dayType = getDayType(now);
+        // The JSON structure: station -> d1 -> weekday -> [list]
+        const trainList = (dirObj[dayType]) ? dirObj[dayType] : [];
+
+        // Logic for "Next Trains"
+        // Railway hours: 0, 1, 2 AM are treated as 24, 25, 26 for sorting purposes in the JSON usually,
+        // but our JSON has them as 0, 1, 2.
+        // We need to normalize "Current Time" vs "Train Time".
+        
+        // Calculate current time in minutes from midnight (0:00)
+        // If current hour is 0, 1, 2, we treat it as next day physically, 
+        // but for comparison, let's just stick to minutes.
+        let nowMinutes = currentHour * 60 + currentMin;
+        
+        // Special logic: If it's late night (e.g. 00:15), we want to show 00:30 trains.
+        // But if it's 23:50, we want to show 00:10 trains (next day).
+        // Since our JSON is sorted (0 comes first), we need to handle the wrap-around.
+        
+        // Simpler approach:
+        // Filter trains where (Hour*60 + Min) >= CurrentTime
+        // IF CurrentTime is late (e.g. > 23:00), we might need to look at trains with hour 0, 1.
+        // In the JSON, hour 0 is usually stored as 0. 
+        // We will create a "comparable minutes" value.
+        
+        const nextTrains = trainList.filter(t => {
+            // Normalize Train Time
+            let tH = t.hour;
+            // If train is 0, 1, 2, treat as 24, 25, 26 for comparison if it helps sorting
+            if (tH < 3) tH += 24;
+
+            // Normalize Current Time
+            let curH = currentHour;
+            if (curH < 3) curH += 24;
+
+            const tTotal = tH * 60 + t.minute;
+            const curTotal = curH * 60 + currentMin;
+
+            return tTotal >= curTotal;
+        });
+
+        // 4. Render HTML
+        const displayCount = 3; // Show 3 rows
+        const trainsToShow = nextTrains.slice(0, displayCount);
+        let html = '';
+
+        if (trainsToShow.length === 0) {
+            html = '<div style="text-align:center; padding:30px; color:#888;">本日の運転は終了しました<br>(End of Service)</div>';
+        } else {
+            trainsToShow.forEach(t => {
+                // Formatting time: pad with 0 (e.g. 9:5 -> 09:05)
+                const hStr = String(t.hour).padStart(2, '0');
+                const mStr = String(t.minute).padStart(2, '0');
+                
+                // Determine Car count (not in data, placeholder or random)
+                // Since scraping didn't get cars, we leave it blank or put "-";
+                const carStr = t.car ? t.car : "-";
+
+                html += `
+                    <div class="train-row led-text">
+                        <div class="col-type ${t.type_class}">${t.type_raw}</div>
+                        <div class="col-time" style="color:#ffb700;">${hStr}:${mStr}</div>
+                        <div class="col-dest" style="color:#ffb700;">${t.dest}</div>
+                        <div class="col-car"  style="color:#00cc00;">${carStr}</div>
+                    </div>
+                `;
+            });
+            
+            // Fill empty rows if less than 3 trains
+            for (let i = trainsToShow.length; i < displayCount; i++) {
+                html += `
+                    <div class="train-row">
+                        <div class="col-type"></div>
+                        <div class="col-time"></div>
+                        <div class="col-dest"></div>
+                        <div class="col-car"></div>
+                    </div>
+                `;
+            }
+        }
+
+        document.getElementById('schedule-list').innerHTML = html;
+    }
+
+    function updateClock() {
+        const now = new Date();
+        const h = String(now.getHours()).padStart(2, '0');
+        const m = String(now.getMinutes()).padStart(2, '0');
+        // Optional seconds styling
+        // const s = String(now.getSeconds()).padStart(2, '0');
+        document.getElementById('clock-container').innerHTML = `${h}:${m}`;
+    }
+
+    function toggleFullScreen() {
+        if (!document.fullscreenElement) {
+            document.documentElement.requestFullscreen();
+            document.body.classList.add('fullscreen');
+        } else {
+            if (document.exitFullscreen) {
+                document.exitFullscreen();
+                document.body.classList.remove('fullscreen');
+            }
+        }
+    }
+
+    // Double tap or click background to toggle fullscreen
+    document.querySelector('.board-frame').addEventListener('dblclick', toggleFullScreen);
+</script>
+</body>
+</html>
