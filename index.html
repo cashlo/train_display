@@ -154,6 +154,11 @@
             margin-top: 1vh;
         }
 
+        /* Blackout for midnight to 7am */
+        body.blackout > * {
+            display: none !important;
+        }
+
     </style>
 </head>
 <body>
@@ -322,6 +327,13 @@
     function updateClock() {
         const now = new Date();
         
+        // Blackout between midnight (0) and 7am (6:59:59)
+        if (now.getHours() >= 0 && now.getHours() <= 6) {
+            document.body.classList.add('blackout');
+        } else {
+            document.body.classList.remove('blackout');
+        }
+
         // Time
         const h = String(now.getHours()).padStart(2, '0');
         const m = String(now.getMinutes()).padStart(2, '0');
